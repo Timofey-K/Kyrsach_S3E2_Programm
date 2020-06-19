@@ -1,0 +1,13 @@
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\bin\Debug\Kyrsach_K3S2_V1.exe.config
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\bin\Debug\Kyrsach_K3S2_V1.exe
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\bin\Debug\Kyrsach_K3S2_V1.pdb
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.csprojAssemblyReference.cache
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.MainF.resources
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.Prodaja.resources
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.Properties.Resources.resources
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.csproj.GenerateResource.cache
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.csproj.CoreCompileInputs.cache
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.exe
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.pdb
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.AddClient.resources
+C:\Users\timca\source\repos\Kyrsach_K3S2_V1\obj\Debug\Kyrsach_K3S2_V1.Log.resources
