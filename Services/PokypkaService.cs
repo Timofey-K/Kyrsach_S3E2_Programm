@@ -14,6 +14,7 @@ namespace Kyrsach_K3S2_V1.Services
                               .ConnectionString;
         public void Pokypka(int idClient, string nameClient, int idWorker, string nameWorker, List<int> kods)
         {
+            string tip = "";
             string korzina;
             korzina = $"{nameClient} купил \n";
             int summCost = 0;
@@ -43,7 +44,7 @@ namespace Kyrsach_K3S2_V1.Services
                                 {
                                     while (reader.Read())
                                     {
-                                        string tip = reader.GetString(0);
+                                        tip = reader.GetString(0);
                                         int cost = reader.GetInt32(1);
 
                                         korzina += $"{tip} за {cost} \n";
@@ -54,7 +55,7 @@ namespace Kyrsach_K3S2_V1.Services
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show("Ошибка выполнения операции");
+                            MessageBox.Show($"Ошибка выполнения операции. \n Оружие {tip} не продано");
                         }
                     }
                 }
