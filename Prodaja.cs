@@ -66,12 +66,26 @@ namespace Kyrsach_K3S2_V1
 
         private void btnProdaja_Click(object sender, EventArgs e)
         {
-            int idWeapon = int.Parse(mtbKodWeapon.Text);
+            
             int idClient = int.Parse(ctlClient.SelectedValue.ToString());
             string nameClient = ctlClient.Text;
-            int idWorker = int.Parse(ctlWorker.SelectedValue.ToString());            
+            int idWorker = int.Parse(ctlWorker.SelectedValue.ToString());
+            string nameWorker = ctlWorker.Text;
+            var kod = new List<int>();
+
+            int count = dgvWeapon.RowCount;
+            for (int i = 0; i<count; i++)
+            {
+                if (Convert.ToInt32(dgvWeapon[0, i].Value) == 1)
+                {
+                    kod.Add(int.Parse(dgvWeapon[1, i].Value.ToString()));
+                }
+            }
+            
+
+
             pokypkaService = new PokypkaService();
-            pokypkaService.Pokypka(idClient, nameClient, idWeapon, idWorker);   
+            pokypkaService.Pokypka(idClient, nameClient, idWorker, nameWorker, kod);   
         }
         //-----------------------------------------------------------------------------------------------------------
         private void btnReset_Click(object sender, EventArgs e)
@@ -113,7 +127,9 @@ namespace Kyrsach_K3S2_V1
                     podZakaz.GetPodZakaz(weapon, quality);
                 }
             }
-            dgvWeapon.DataSource = weapon;
+            dgvWeapon.DataSource = weapon.AsReadOnly();
+
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -11,46 +12,57 @@ namespace Kyrsach_K3S2_V1.Services
         private static string connectionString = ConfigurationManager
                               .ConnectionStrings["МагазинСредневековогоОружия"]
                               .ConnectionString;
-        public void Pokypka(int idClient, string nameClient, int idWeapon, int idWorker)
+        public void Pokypka(int idClient, string nameClient, int idWorker, string nameWorker, List<int> kods)
         {
-            using (var connection = new SqlConnection(connectionString))
+            string korzina;
+            korzina = $"{nameClient} купил \n";
+            int summCost = 0;
+            DateTime dateTime = DateTime.Now;
+            foreach (int kod in kods)
             {
-                connection.Open();
-                using (var command = connection.CreateCommand())
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    try
+                    connection.Open();
+                    using (var command = connection.CreateCommand())
                     {
-                        command.CommandText = $@"EXEC opPokupka @idClient, @idWeapon, @idWorker, @dateTime";
-                        command.Parameters.AddWithValue("@idClient", idClient);
-                        command.Parameters.AddWithValue("@idWeapon", idWeapon);
-                        command.Parameters.AddWithValue("@idWorker", idWorker);
-                        command.Parameters.AddWithValue("@dateTime", DateTime.Now);
-                        command.ExecuteNonQuery();
-
-                        command.CommandText = $@"select Тип, Стоимость from ОружиеКолющее Where КодОружия = {idWeapon}
-                                      union select Тип, Стоимость from ОружиеРубящее Where КодОружия = {idWeapon}
-                                      union select Тип, Стоимость from ОружиеУдарное Where КодОружия = {idWeapon}
-                                      union select Тип, Стоимость from ОружиеПодЗаказ Where КодОружия = {idWeapon}";
-                        using (var reader = command.ExecuteReader())
+                        try
                         {
-                            if (reader.HasRows)
+                            command.CommandText = $@"EXEC opPokupka @idClient, @idWeapon, @idWorker, @dateTime";
+                            command.Parameters.AddWithValue("@idClient", idClient);
+                            command.Parameters.AddWithValue("@idWeapon", kod);
+                            command.Parameters.AddWithValue("@idWorker", idWorker);
+                            command.Parameters.AddWithValue("@dateTime", dateTime);
+                            command.ExecuteNonQuery();
+                            command.CommandText = $@"select Тип, Стоимость from ОружиеКолющее Where КодОружия = {kod}
+                                      union select Тип, Стоимость from ОружиеРубящее Where КодОружия = {kod}
+                                      union select Тип, Стоимость from ОружиеУдарное Where КодОружия = {kod}
+                                      union select Тип, Стоимость from ОружиеПодЗаказ Where КодОружия = {kod}";
+                            using (var reader = command.ExecuteReader())
                             {
-                                while (reader.Read())
+                                if (reader.HasRows)
                                 {
-                                    string tip = reader.GetString(0);
-                                    int cost = reader.GetInt32(1);
+                                    while (reader.Read())
+                                    {
+                                        string tip = reader.GetString(0);
+                                        int cost = reader.GetInt32(1);
 
-                                    MessageBox.Show($"Клиент {nameClient} купил {tip} за {cost}");
+                                        korzina += $"{tip} за {cost} \n";
+                                        summCost += cost;
+                                    }
                                 }
                             }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("Ошибка выполнения операции");
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Ошибка выполнения операции");
+                        }
                     }
                 }
             }
+            korzina += $"Общая стоимость покупки = {summCost} \n";
+            korzina += $"Покупку оформил {nameWorker} \n";
+            korzina += $"Дата операции {dateTime}";
+            MessageBox.Show(korzina);
         }
     }
 }

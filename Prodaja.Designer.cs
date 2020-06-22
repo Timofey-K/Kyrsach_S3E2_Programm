@@ -34,14 +34,13 @@
             this.ctlWorker = new System.Windows.Forms.ComboBox();
             this.ctlClient = new System.Windows.Forms.ComboBox();
             this.btnOtmena = new System.Windows.Forms.Button();
-            this.lblKodWeapon = new System.Windows.Forms.Label();
-            this.mtbKodWeapon = new System.Windows.Forms.MaskedTextBox();
             this.dgvWeapon = new System.Windows.Forms.DataGridView();
             this.ctlTip = new System.Windows.Forms.ComboBox();
             this.ctlQuality = new System.Windows.Forms.ComboBox();
             this.lblTip = new System.Windows.Forms.Label();
             this.lblQuality = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
+            this.Продать = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWeapon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +64,7 @@
             // 
             // btnProdaja
             // 
-            this.btnProdaja.Location = new System.Drawing.Point(754, 196);
+            this.btnProdaja.Location = new System.Drawing.Point(754, 157);
             this.btnProdaja.Name = "btnProdaja";
             this.btnProdaja.Size = new System.Drawing.Size(110, 23);
             this.btnProdaja.TabIndex = 8;
@@ -101,31 +100,15 @@
             this.btnOtmena.Text = "Выход";
             this.btnOtmena.UseVisualStyleBackColor = true;
             // 
-            // lblKodWeapon
-            // 
-            this.lblKodWeapon.AutoSize = true;
-            this.lblKodWeapon.Location = new System.Drawing.Point(751, 154);
-            this.lblKodWeapon.Name = "lblKodWeapon";
-            this.lblKodWeapon.Size = new System.Drawing.Size(113, 13);
-            this.lblKodWeapon.TabIndex = 14;
-            this.lblKodWeapon.Text = "Введите Код Оружия";
-            // 
-            // mtbKodWeapon
-            // 
-            this.mtbKodWeapon.Location = new System.Drawing.Point(754, 170);
-            this.mtbKodWeapon.Mask = "000";
-            this.mtbKodWeapon.Name = "mtbKodWeapon";
-            this.mtbKodWeapon.Size = new System.Drawing.Size(110, 20);
-            this.mtbKodWeapon.TabIndex = 16;
-            // 
             // dgvWeapon
             // 
             this.dgvWeapon.AllowUserToAddRows = false;
             this.dgvWeapon.AllowUserToDeleteRows = false;
             this.dgvWeapon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWeapon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Продать});
             this.dgvWeapon.Location = new System.Drawing.Point(12, 114);
             this.dgvWeapon.Name = "dgvWeapon";
-            this.dgvWeapon.ReadOnly = true;
             this.dgvWeapon.Size = new System.Drawing.Size(703, 367);
             this.dgvWeapon.TabIndex = 17;
             // 
@@ -175,6 +158,11 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // Продать
+            // 
+            this.Продать.HeaderText = "Продать";
+            this.Продать.Name = "Продать";
+            // 
             // Prodaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,8 +174,6 @@
             this.Controls.Add(this.ctlQuality);
             this.Controls.Add(this.ctlTip);
             this.Controls.Add(this.dgvWeapon);
-            this.Controls.Add(this.mtbKodWeapon);
-            this.Controls.Add(this.lblKodWeapon);
             this.Controls.Add(this.btnOtmena);
             this.Controls.Add(this.ctlClient);
             this.Controls.Add(this.ctlWorker);
@@ -209,13 +195,12 @@
         private System.Windows.Forms.ComboBox ctlWorker;
         private System.Windows.Forms.ComboBox ctlClient;
         private System.Windows.Forms.Button btnOtmena;
-        private System.Windows.Forms.Label lblKodWeapon;
-        private System.Windows.Forms.MaskedTextBox mtbKodWeapon;
         private System.Windows.Forms.DataGridView dgvWeapon;
         private System.Windows.Forms.ComboBox ctlTip;
         private System.Windows.Forms.ComboBox ctlQuality;
         private System.Windows.Forms.Label lblTip;
         private System.Windows.Forms.Label lblQuality;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Продать;
     }
 }
