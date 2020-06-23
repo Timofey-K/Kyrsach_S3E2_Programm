@@ -5,16 +5,11 @@ using System.Data.SqlClient;
 
 namespace Kyrsach_K3S2_V1.Services
 {
-    public class WorkerService
-    {
-        private static string connectionString = ConfigurationManager
-                    .ConnectionStrings["МагазинСредневековогоОружия"]
-                    .ConnectionString;
-
-
-        public void GetWorker(List<Worker> workers)
+    public class WorkerService : ServiceBase
+    {       
+        public List<Worker> GetWorker(List<Worker> workers)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
@@ -28,12 +23,13 @@ namespace Kyrsach_K3S2_V1.Services
                             {
                                 int id = reader.GetInt32(0);
                                 string name = reader.GetString(1);
-                                workers.Add(new Worker() { idWorker = id, fioWorker = name });
+                                workers.Add(new Worker() { IdW = id, Fio = name });
                             }
                         }
                     }
                 }
             }
+            return workers;
         }
     }
 }

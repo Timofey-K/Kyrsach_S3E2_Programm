@@ -13,7 +13,7 @@ namespace Kyrsach_K3S2_V1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainF());
+            Application.Run(new MainForm());
         }
     }
 }

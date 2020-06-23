@@ -13,12 +13,20 @@ namespace Kyrsach_K3S2_V1
         public AddClient()
         {
             InitializeComponent();
-            clientService = new ClientService();
+            clientService = new ClientService();            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-           clientService.Insert(tbName.Text, mtbTel.Text);
+            try
+            {
+                clientService.Insert(tbName.Text, mtbTel.Text);
+                MessageBox.Show($"Клиент {tbName.Text} зарегестрирован");
+            }
+            catch
+            {
+                MessageBox.Show("Клиент с таким номером уже существует");
+            }            
         }       
     }
 }

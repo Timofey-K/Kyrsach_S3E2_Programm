@@ -2,11 +2,11 @@
 {
     public class Weapon
     {
-        public int id { get; set; }
-        public string Тип { get; set; }
-        public bool Разрешение { get; set; }
-        public string Качество { get; set; }
-        public int Стоимость { get; set; }
-        public string Описание { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public bool Permission { get; set; }
+        public string Quality { get; set; }
+        public int Cost { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -2,8 +2,6 @@
 using Kyrsach_K3S2_V1.Services;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Kyrsach_K3S2_V1
@@ -12,12 +10,9 @@ namespace Kyrsach_K3S2_V1
     {
         private ClientService client;
         private WorkerService worker;
-        private KolusheeService kolushee;
-        private RubasheeService rubashee;
-        private YdarnoeService ydarnoe;
-        private PodZakazService podZakaz;
         private PokypkaService pokypkaService;
-       
+        private WeaponService weaponService;
+
         public Prodaja()
         {
             InitializeComponent();
@@ -29,107 +24,109 @@ namespace Kyrsach_K3S2_V1
             var workers = new List<Worker>();
             worker.GetWorker(workers);
             ctlWorker.DataSource = workers;
-            ctlWorker.DisplayMember = "fioWorker";
-            ctlWorker.ValueMember = "idWorker";
+            ctlWorker.DisplayMember = "Fio";
+            ctlWorker.ValueMember = "IdW";
 
             //-----------------------------------------------------------------------------------------------------------
 
             // Создание списка Клиентов для ctlClient
 
             client = new ClientService();
-            var Clients = new List<Client>();
-            client.GetClient(Clients);
-            ctlClient.DataSource = Clients;
-            ctlClient.DisplayMember = "fioClient";
-            ctlClient.ValueMember = "idClient";
+            var clients = new List<Client>();
+            client.GetClient(clients);
+            ctlClient.DataSource = clients;
+            ctlClient.DisplayMember = "Fio";
+            ctlClient.ValueMember = "Id";
 
             //-----------------------------------------------------------------------------------------------------------
             //Список типов и качества оружия
 
-            var TipWeapon = new List<string>();
-            TipWeapon.Add("Всё");
-            TipWeapon.Add("Оружие Колющее");
-            TipWeapon.Add("Оружие Рубящее");
-            TipWeapon.Add("Оружие Ударное");
-            TipWeapon.Add("Оружие Под Заказ");
-            ctlTip.DataSource = TipWeapon;
+            var typeWeapon = new List<string>();
+            typeWeapon.Add("Всё");
+            typeWeapon.Add("ОружиеКолющее");
+            typeWeapon.Add("ОружиеРубящее");
+            typeWeapon.Add("ОружиеУдарное");
+            typeWeapon.Add("ОружиеПодЗаказ");
+            ctlTip.DataSource = typeWeapon;
 
-            var QualityWeapon = new List<string>();
-            QualityWeapon.Add("Всё");
-            QualityWeapon.Add("Коллекционное");
-            QualityWeapon.Add("Настоящее");
-            QualityWeapon.Add("Бутафорное");
-            ctlQuality.DataSource = QualityWeapon;
+            var qualityWeapon = new List<string>();
+            qualityWeapon.Add("Всё");
+            qualityWeapon.Add("Коллекционное");
+            qualityWeapon.Add("Настоящее");
+            qualityWeapon.Add("Бутафорное");
+            ctlQuality.DataSource = qualityWeapon;
         }
 
         //-----------------------------------------------------------------------------------------------------------
 
         private void btnProdaja_Click(object sender, EventArgs e)
         {
-            
             int idClient = int.Parse(ctlClient.SelectedValue.ToString());
             string nameClient = ctlClient.Text;
             int idWorker = int.Parse(ctlWorker.SelectedValue.ToString());
             string nameWorker = ctlWorker.Text;
-            var kod = new List<int>();
-
+            string resultOp;
+            var kodWeapon = new List<int>();
             int count = dgvWeapon.RowCount;
-            for (int i = 0; i<count; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (Convert.ToInt32(dgvWeapon[0, i].Value) == 1)
                 {
-                    kod.Add(int.Parse(dgvWeapon[1, i].Value.ToString()));
+                    kodWeapon.Add(int.Parse(dgvWeapon[1, i].Value.ToString()));
                 }
             }
-            
 
 
             pokypkaService = new PokypkaService();
-            pokypkaService.Pokypka(idClient, nameClient, idWorker, nameWorker, kod);   
+            try
+            {
+                resultOp = pokypkaService.Pokypka(idClient, nameClient, idWorker, nameWorker, kodWeapon);
+                MessageBox.Show(resultOp);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка выполнения операции");
+            }
+            
         }
         //-----------------------------------------------------------------------------------------------------------
         private void btnReset_Click(object sender, EventArgs e)
         {
             string from = ctlTip.Text;
             string quality = ctlQuality.Text;
-            kolushee = new KolusheeService();
-            rubashee = new RubasheeService();
-            ydarnoe = new YdarnoeService();
-            podZakaz = new PodZakazService();
 
+            weaponService = new WeaponService();
             var weapon = new List<Weapon>();
 
             if (quality == "Всё")
             {
-                if (from == "Оружие Колющее") kolushee.GetKolushee(weapon);
-                else if (from == "Оружие Рубящее") rubashee.GetRubashee(weapon);
-                else if (from == "Оружие Ударное") ydarnoe.GetYdarnoe(weapon);
-                else if (from == "Оружие Под Заказ") podZakaz.GetPodZakaz(weapon);
+                if (from == "Всё")
+                {
+                    weaponService.GetListWeapon(weapon, "ОружиеКолющее");
+                    weaponService.GetListWeapon(weapon, "ОружиеРубящее");
+                    weaponService.GetListWeapon(weapon, "ОружиеУдарное");
+                    weaponService.GetListWeapon(weapon, "ОружиеПодЗаказ");
+                }
                 else
                 {
-                    kolushee.GetKolushee(weapon);
-                    rubashee.GetRubashee(weapon);
-                    ydarnoe.GetYdarnoe(weapon);
-                    podZakaz.GetPodZakaz(weapon);
+                    weaponService.GetListWeapon(weapon, from);
                 }
             }
             else
             {
-                if (from == "Оружие Колющее") kolushee.GetKolushee(weapon, quality);
-                else if (from == "Оружие Рубящее") rubashee.GetRubashee(weapon, quality);
-                else if (from == "Оружие Ударное") ydarnoe.GetYdarnoe(weapon, quality);
-                else if (from == "Оружие Под Заказ") podZakaz.GetPodZakaz(weapon, quality);
+                if (from == "Всё")
+                {
+                    weaponService.GetListWeapon(weapon, quality, "ОружиеКолющее");
+                    weaponService.GetListWeapon(weapon, quality, "ОружиеРубящее");
+                    weaponService.GetListWeapon(weapon, quality, "ОружиеУдарное");
+                    weaponService.GetListWeapon(weapon, quality, "ОружиеПодЗаказ");
+                }
                 else
                 {
-                    kolushee.GetKolushee(weapon, quality);
-                    rubashee.GetRubashee(weapon, quality);
-                    ydarnoe.GetYdarnoe(weapon, quality);
-                    podZakaz.GetPodZakaz(weapon, quality);
+                    weaponService.GetListWeapon(weapon, quality, from);
                 }
             }
             dgvWeapon.DataSource = weapon.AsReadOnly();
-
-            
         }
     }
 }

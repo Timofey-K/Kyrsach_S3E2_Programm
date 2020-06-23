@@ -15,9 +15,9 @@ namespace Kyrsach_K3S2_V1
             InitializeComponent();
 
             logOperation = new LogOperation();
-            var Operation = new List<LogOperation>();
-            logOperation.GetLog(Operation);
-            dgvLog.DataSource = Operation;
+            var operation = new List<LogOperation>();
+            logOperation.GetLog(operation);
+            dgvLog.DataSource = operation;
         }
     }
 }

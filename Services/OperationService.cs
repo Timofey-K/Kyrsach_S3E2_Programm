@@ -7,53 +7,49 @@ namespace Kyrsach_K3S2_V1.Services
 {
     class OperationService
     {
-        int idOperation { get; set; }
-        int idWorker { get; set; }
-        DateTime date { get; set; }
-        int cost { get; set; }
-        string tipOperation { get; set; }
+        public int IdOp { get; set; }
+        public int IdW { get; set; }
+        public DateTime Date { get; set; }
+        public int Cost { get; set; }
+        public string TypeOp { get; set; }
     }
-
-    public class LogOperation
+    public class LogOperation : ServiceBase
     {
-        public string ФИОКлиента { get; set; }
-        public string ТипОперации { get; set; }
-        public DateTime ДатаВремя { get; set; }
-        public int Стоимость { get; set; }
-        public string ТелефонКлиента { get; set; }
+        public string FioC { get; set; }
+        public string TypeOp { get; set; }
+        public DateTime DateTime { get; set; }
+        public int Cost { get; set; }
+        public string PhoneC { get; set; }       
 
-        private static string connectionString = ConfigurationManager
-                   .ConnectionStrings["МагазинСредневековогоОружия"]
-                   .ConnectionString;
-
-        public void GetLog(List<LogOperation> logOperations)
+        public List<LogOperation> GetLog(List<LogOperation> logOperations)
         {
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = $@"Select ФИОКлиента, ТипОперации, ДатаВремя, Стоимость, Телефон 
-                                            From Gyrnal";
+                                            From Журнал";
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
                             while (reader.Read())
                             {
-                                string Фио = reader.GetString(0);
-                                string Тип = reader.GetString(1);
+                                string fio = reader.GetString(0);
+                                string type = reader.GetString(1);
                                 DateTime date = reader.GetDateTime(2);
-                                int Стоимость = reader.GetInt32(3);
-                                string Телефон = reader.GetString(4);
+                                int cost = reader.GetInt32(3);
+                                string phone = reader.GetString(4);
 
-                                logOperations.Add(new LogOperation() { ФИОКлиента = Фио, ТипОперации = Тип, ДатаВремя = date, Стоимость = Стоимость, ТелефонКлиента = Телефон });
+                                logOperations.Add(new LogOperation() { FioC = fio, TypeOp = type, DateTime = date, Cost = cost, PhoneC = phone });
                             }
                         }
                     }
                 }
             }
+            return logOperations;
         }
     }
 }

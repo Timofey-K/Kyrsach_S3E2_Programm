@@ -1,6 +1,6 @@
 ﻿namespace Kyrsach_K3S2_V1
 {
-    partial class MainF
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -96,7 +96,7 @@
             this.btnLog.UseVisualStyleBackColor = true;
             this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
-            // MainF
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -107,7 +107,7 @@
             this.Controls.Add(this.btnRest);
             this.Controls.Add(this.btnMerop);
             this.Controls.Add(this.btnProdaja);
-            this.Name = "MainF";
+            this.Name = "MainForm";
             this.Text = "Магазин";
             this.ResumeLayout(false);
 

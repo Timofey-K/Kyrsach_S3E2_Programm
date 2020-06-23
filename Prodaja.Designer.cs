@@ -35,12 +35,12 @@
             this.ctlClient = new System.Windows.Forms.ComboBox();
             this.btnOtmena = new System.Windows.Forms.Button();
             this.dgvWeapon = new System.Windows.Forms.DataGridView();
+            this.Продать = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ctlTip = new System.Windows.Forms.ComboBox();
             this.ctlQuality = new System.Windows.Forms.ComboBox();
             this.lblTip = new System.Windows.Forms.Label();
             this.lblQuality = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
-            this.Продать = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWeapon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,6 +112,11 @@
             this.dgvWeapon.Size = new System.Drawing.Size(703, 367);
             this.dgvWeapon.TabIndex = 17;
             // 
+            // Продать
+            // 
+            this.Продать.HeaderText = "Продать";
+            this.Продать.Name = "Продать";
+            // 
             // ctlTip
             // 
             this.ctlTip.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -157,11 +162,6 @@
             this.btnReset.Text = "Обновить";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // Продать
-            // 
-            this.Продать.HeaderText = "Продать";
-            this.Продать.Name = "Продать";
             // 
             // Prodaja
             // 

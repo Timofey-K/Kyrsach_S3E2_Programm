@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Kyrsach_K3S2_V1
 {
-    public partial class MainF : Form
+    public partial class MainForm : Form
     {
-        public MainF()
+        public MainForm()
         {
             InitializeComponent();
         }

@@ -3,9 +3,9 @@
     public class Client
     {
 
-       public int idClient { get; set; }
-       public string fioClient { get; set; }
-       public string telefonClient { get; set; }
+       public int Id { get; set; }
+       public string Fio { get; set; }
+       public string Phone { get; set; }
 
     }
 }
